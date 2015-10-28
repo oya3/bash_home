@@ -1,0 +1,16 @@
+# emacs
+*~
+*\#*
+work
+www
+realtime-preview-result.html
+.pry_history
+.bash_history
+.emacs.d/.emacs.desktop*
+.emacs.d/.framesize.el
+.emacs.d/.framesize*
+.emacs.d/ac-comphist.dat
+.emacs.d/server/*
+.emacs.d/url/*
+.emacs.d/emacs_backtrace.txt
+.emacs.d/abbrev_defs
