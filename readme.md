@@ -20,10 +20,11 @@ $ choco install packages.config
 ## 環境変数を登録  
 
 ```rb
-# windowsのシステム設定から以下の環境変数を設定する。
-set ALTERNATE_EDITOR=C:\bash_home\tools\emacs\bin\runemacs.exe
-set EMACS_SERVER_FILE=C:\bash_home\.emacs.d\server\main_server
-set HOME=C:\bash_home
+# 管理者権限で set_environment_variables.bat を実行する。
+$ c:\bash_home\set_environment_variables.bat
+# setx /M ALTERNATE_EDITOR "C:\bash_home\tools\emacs\bin\runemacs.exe"
+# setx /M EMACS_SERVER_FILE "C:\bash_home\.emacs.d\server\main_server"
+# setx /M HOME "C:\bash_home"
 ```
 
 ## proxy 設定が必要な場合
