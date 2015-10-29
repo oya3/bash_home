@@ -14,3 +14,5 @@ realtime-preview-result.html
 .emacs.d/url/*
 .emacs.d/emacs_backtrace.txt
 .emacs.d/abbrev_defs
+
+tools/emacs/bin/emacs_backtrace.txt

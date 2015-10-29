@@ -155,7 +155,7 @@
   (server-start))
 
 ;; proxy
-;; (setq url-proxy-services '(("http" . "192.168.1.200:8080")))
+(setq url-proxy-services '(("http" . "172.17.10.213:8080")))
 
 ;; 環境別ファイル読み込み(windows=w32.ini,mac=mac.ini)
 (load (locate-user-emacs-file (concat "init_" (prin1-to-string window-system) ".el") ) )
@@ -1004,6 +1004,17 @@ mouse-3: delete other windows"
 ;;------------------------------------------------------------------------------
 ;; javascript
 (setq js-indent-level 2)
+
+;;------------------------------------------------------------------------------
+;; web-beautify
+;; 利用する場合は以下を実施する必要がある
+;; $ npm -g install js-beautify
+;; ;; ファイル保存時に自動整形したい場合。
+;; (eval-after-load 'js
+;;   '(add-hook 'js-mode-hook
+;;              (lambda ()
+;;                (add-hook 'before-save-hook 'web-beautify-js-buffer t t))))
+
 
 ;; ediff コマンド
 ;; n ... 次
