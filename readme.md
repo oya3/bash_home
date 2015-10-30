@@ -62,12 +62,12 @@ conemu起動後、setting プロパティを表示し以下の設定を行う。
 ### tasks 設定
 Startup/Tasks から以下の必要なものを設定する
 
-- git bash 1.9.5 の場合(git_bash)
+- git bash 1.9.5 の場合(git_bash)  
   task parameters: /icon "C:\Program Files (x86)\Git\etc\git.ico"
   commands: "C:\Program Files (x86)\Git\bin\sh.exe" --login -i -cur_console:d:C:\bash_home
-- vc2008 の場合(Shells::vc2008)
+- vc2008 の場合(Shells::vc2008)  
   commands: %comspec% /k "C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvarsall.bat" x86
-- commandline の場合(Shells::command)
+- commandline の場合(Shells::command)  
 commands: %windir%\system32\cmd.exe
 
 ### 半透明設定
