@@ -72,12 +72,14 @@ commands: %windir%\system32\cmd.exe
 ### 半透明設定
 Features/Transparency の Active window transparency をチェックしスライダーを自分好みに変更する
 
-- テーマ設定  
-  Features/Colors の Schemes を自分好みに変更する(xtermがおすすめ)
-- 不用なショートカットを削除
-  Key & Macro の Ctrl + @ (Minimize / Resotre(Quake-style hotkey also)) を None に変更する。
-- 起動時コンソールを設定  
-  Startup の Specified named task を git_bash
+### テーマ設定  
+Features/Colors の Schemes を自分好みに変更する(xtermがおすすめ)
+
+### 不用なショートカットを削除
+Key & Macro の Ctrl + @ (Minimize / Resotre(Quake-style hotkey also)) を None に変更する。
+
+### 起動時コンソールを設定
+Startup の Specified named task を git_bash
 
 # git動作変更
 - commit ログ記載ツールが vim から emacs(clinet) に変更。※runemacsサーバが起動していなければいけない。
