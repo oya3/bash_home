@@ -17,6 +17,7 @@ $ choco install packages.config
 ## 環境変数を登録  
 管理者権限で set_environment_variables.bat を実行する。
 > $ c:\bash_home\set_environment_variables.bat
+
 実行される内容は以下の通り。
 > $ setx /M ALTERNATE_EDITOR "C:\bash_home\tools\emacs\bin\runemacs.exe"
 > $ setx /M EMACS_SERVER_FILE "C:\bash_home\.emacs.d\server\main_server"
