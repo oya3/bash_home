@@ -19,9 +19,9 @@ $ choco install packages.config
 > $ c:\bash_home\set_environment_variables.bat
 
 実行される内容は以下の通り。
-> $ setx /M ALTERNATE_EDITOR "C:\bash_home\tools\emacs\bin\runemacs.exe"
-> $ setx /M EMACS_SERVER_FILE "C:\bash_home\.emacs.d\server\main_server"
-> $ setx /M HOME "C:\bash_home"
+> $ setx /M ALTERNATE_EDITOR "C:\bash_home\tools\emacs\bin\runemacs.exe"  
+> $ setx /M EMACS_SERVER_FILE "C:\bash_home\.emacs.d\server\main_server"  
+> $ setx /M HOME "C:\bash_home"  
 
 ## proxy 設定が必要な場合
 基本的にwindows ネットワーク設定で問題ないはず。
