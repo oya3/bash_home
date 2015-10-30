@@ -9,8 +9,8 @@ realtime-preview-result.html
 .emacs.d/.emacs.desktop*
 .emacs.d/.framesize*
 .emacs.d/ac-comphist.dat
-.emacs.d/server/*
-.emacs.d/url/*
+.emacs.d/server
+.emacs.d/url
 .emacs.d/emacs_backtrace.txt
 .emacs.d/abbrev_defs
 .emacs.d/auto-save-list
