@@ -1007,6 +1007,8 @@ mouse-3: delete other windows"
 
 ;;------------------------------------------------------------------------------
 ;; web-beautify
+;; 公式: https://github.com/yasuyk/web-beautify
+;; npm js-beautify: https://www.npmjs.com/package/js-beautify
 ;; 利用する場合は以下を実施する必要がある
 ;; $ npm -g install js-beautify
 ;; ;; ファイル保存時に自動整形したい場合。
