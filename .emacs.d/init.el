@@ -840,6 +840,14 @@ mouse-3: delete other windows"
           )
 
 ;;------------------------------------------------------------------------------
+(add-hook 'java-mode-hook
+          '(lambda()
+             (setq indent-tabs-mode t)
+             (gtags-mode 1)
+             )
+          )
+
+;;------------------------------------------------------------------------------
 ;; (require 'csharp-mode)
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 (add-hook 'csharp-mode-hook
