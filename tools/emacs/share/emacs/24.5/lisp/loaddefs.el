@@ -16197,8 +16197,8 @@ You can bind this to the key C-c i in GNUS or mail by adding to
 
 ;;;***
 
-;;;### (autoloads nil "japan-util" "language/japan-util.el" (21804
-;;;;;;  46602 0 0))
+;;;### (autoloads nil "japan-util" "language/japan-util.el" (21710
+;;;;;;  25077 0 0))
 ;;; Generated autoloads from language/japan-util.el
 
 (autoload 'setup-japanese-environment-internal "japan-util" "\
@@ -31764,28 +31764,27 @@ Zone out, completely.
 ;;;;;;  "international/uni-mirrored.el" "international/uni-name.el"
 ;;;;;;  "international/uni-numeric.el" "international/uni-old-name.el"
 ;;;;;;  "international/uni-titlecase.el" "international/uni-uppercase.el"
-;;;;;;  "international/w32-ime.el" "kermit.el" "language/hanja-util.el"
-;;;;;;  "language/thai-word.el" "ldefs-boot.el" "leim/ja-dic/ja-dic.el"
-;;;;;;  "leim/quail/arabic.el" "leim/quail/croatian.el" "leim/quail/cyril-jis.el"
-;;;;;;  "leim/quail/cyrillic.el" "leim/quail/czech.el" "leim/quail/ethiopic.el"
-;;;;;;  "leim/quail/georgian.el" "leim/quail/greek.el" "leim/quail/hanja-jis.el"
-;;;;;;  "leim/quail/hanja.el" "leim/quail/hanja3.el" "leim/quail/hebrew.el"
-;;;;;;  "leim/quail/indian.el" "leim/quail/ipa-praat.el" "leim/quail/ipa.el"
-;;;;;;  "leim/quail/japanese.el" "leim/quail/lao.el" "leim/quail/latin-alt.el"
-;;;;;;  "leim/quail/latin-ltx.el" "leim/quail/latin-post.el" "leim/quail/latin-pre.el"
-;;;;;;  "leim/quail/lrt.el" "leim/quail/persian.el" "leim/quail/py-punct.el"
-;;;;;;  "leim/quail/pypunct-b5.el" "leim/quail/rfc1345.el" "leim/quail/sgml-input.el"
-;;;;;;  "leim/quail/sisheng.el" "leim/quail/slovak.el" "leim/quail/symbol-ksc.el"
-;;;;;;  "leim/quail/thai.el" "leim/quail/tibetan.el" "leim/quail/viqr.el"
-;;;;;;  "leim/quail/vntelex.el" "leim/quail/vnvni.el" "leim/quail/welsh.el"
-;;;;;;  "loadup.el" "mail/blessmail.el" "mail/mailheader.el" "mail/mspools.el"
-;;;;;;  "mail/rfc2368.el" "mail/rfc822.el" "mail/rmail-spam-filter.el"
-;;;;;;  "mail/rmailedit.el" "mail/rmailkwd.el" "mail/rmailmm.el"
-;;;;;;  "mail/rmailmsc.el" "mail/rmailsort.el" "mail/rmailsum.el"
-;;;;;;  "mail/undigest.el" "mh-e/mh-acros.el" "mh-e/mh-alias.el"
-;;;;;;  "mh-e/mh-buffers.el" "mh-e/mh-compat.el" "mh-e/mh-funcs.el"
-;;;;;;  "mh-e/mh-gnus.el" "mh-e/mh-identity.el" "mh-e/mh-inc.el"
-;;;;;;  "mh-e/mh-junk.el" "mh-e/mh-letter.el" "mh-e/mh-limit.el"
+;;;;;;  "kermit.el" "language/hanja-util.el" "language/thai-word.el"
+;;;;;;  "ldefs-boot.el" "leim/ja-dic/ja-dic.el" "leim/quail/arabic.el"
+;;;;;;  "leim/quail/croatian.el" "leim/quail/cyril-jis.el" "leim/quail/cyrillic.el"
+;;;;;;  "leim/quail/czech.el" "leim/quail/ethiopic.el" "leim/quail/georgian.el"
+;;;;;;  "leim/quail/greek.el" "leim/quail/hanja-jis.el" "leim/quail/hanja.el"
+;;;;;;  "leim/quail/hanja3.el" "leim/quail/hebrew.el" "leim/quail/indian.el"
+;;;;;;  "leim/quail/ipa-praat.el" "leim/quail/ipa.el" "leim/quail/japanese.el"
+;;;;;;  "leim/quail/lao.el" "leim/quail/latin-alt.el" "leim/quail/latin-ltx.el"
+;;;;;;  "leim/quail/latin-post.el" "leim/quail/latin-pre.el" "leim/quail/lrt.el"
+;;;;;;  "leim/quail/persian.el" "leim/quail/py-punct.el" "leim/quail/pypunct-b5.el"
+;;;;;;  "leim/quail/rfc1345.el" "leim/quail/sgml-input.el" "leim/quail/sisheng.el"
+;;;;;;  "leim/quail/slovak.el" "leim/quail/symbol-ksc.el" "leim/quail/thai.el"
+;;;;;;  "leim/quail/tibetan.el" "leim/quail/viqr.el" "leim/quail/vntelex.el"
+;;;;;;  "leim/quail/vnvni.el" "leim/quail/welsh.el" "loadup.el" "mail/blessmail.el"
+;;;;;;  "mail/mailheader.el" "mail/mspools.el" "mail/rfc2368.el"
+;;;;;;  "mail/rfc822.el" "mail/rmail-spam-filter.el" "mail/rmailedit.el"
+;;;;;;  "mail/rmailkwd.el" "mail/rmailmm.el" "mail/rmailmsc.el" "mail/rmailsort.el"
+;;;;;;  "mail/rmailsum.el" "mail/undigest.el" "mh-e/mh-acros.el"
+;;;;;;  "mh-e/mh-alias.el" "mh-e/mh-buffers.el" "mh-e/mh-compat.el"
+;;;;;;  "mh-e/mh-funcs.el" "mh-e/mh-gnus.el" "mh-e/mh-identity.el"
+;;;;;;  "mh-e/mh-inc.el" "mh-e/mh-junk.el" "mh-e/mh-letter.el" "mh-e/mh-limit.el"
 ;;;;;;  "mh-e/mh-loaddefs.el" "mh-e/mh-mime.el" "mh-e/mh-print.el"
 ;;;;;;  "mh-e/mh-scan.el" "mh-e/mh-search.el" "mh-e/mh-seq.el" "mh-e/mh-show.el"
 ;;;;;;  "mh-e/mh-speed.el" "mh-e/mh-thread.el" "mh-e/mh-tool-bar.el"
@@ -31853,8 +31852,8 @@ Zone out, completely.
 ;;;;;;  "vc/ediff-ptch.el" "vc/ediff-vers.el" "vc/ediff-wind.el"
 ;;;;;;  "vc/pcvs-info.el" "vc/pcvs-parse.el" "vc/pcvs-util.el" "vc/vc-dav.el"
 ;;;;;;  "vcursor.el" "vt-control.el" "vt100-led.el" "w32-common-fns.el"
-;;;;;;  "w32-fns.el" "w32-vars.el" "x-dnd.el") (21804 47401 996114
-;;;;;;  200000))
+;;;;;;  "w32-fns.el" "w32-vars.el" "x-dnd.el") (22014 52834 641139
+;;;;;;  700000))
 
 ;;;***
 

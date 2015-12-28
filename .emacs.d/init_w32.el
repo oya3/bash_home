@@ -38,11 +38,11 @@
 (setq-default w32-ime-mode-line-state-indicator "[Aa] ")
 (setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[あ]" "[Aa]"))
 
-;; IME初期化
-(w32-ime-initialize)
-
-;; デフォルトIME
-(setq default-input-method "W32-IME")
+;;;; IME初期化
+;;(w32-ime-initialize)
+;;
+;;;; デフォルトIME
+;;(setq default-input-method "W32-IME")
 
 ;; IME変更
 ;; (global-set-key (kbd "C-\\") 'toggle-input-method)
