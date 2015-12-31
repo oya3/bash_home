@@ -743,8 +743,8 @@ Email address to send bug reports to.")
 ;;;;;;  "rcirc.el" "rlogin.el" "sasl-cram.el" "sasl-digest.el" "sasl-ntlm.el"
 ;;;;;;  "sasl.el" "secrets.el" "shr-color.el" "shr.el" "snmp-mode.el"
 ;;;;;;  "soap-client.el" "soap-inspect.el" "socks.el" "telnet.el"
-;;;;;;  "tls.el" "tramp-compat.el" "webjump.el" "zeroconf.el") (22014
-;;;;;;  52833 424337 500000))
+;;;;;;  "tls.el" "tramp-compat.el" "webjump.el" "zeroconf.el") (21804
+;;;;;;  47401 356513 100000))
 
 ;;;***
 

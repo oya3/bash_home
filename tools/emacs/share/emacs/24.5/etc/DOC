@@ -1836,7 +1836,30 @@ value of DIR as in previous invocations; this is standard Windows behavior.
 (fn PROMPT DIR &optional DEFAULT-FILENAME MUSTMATCH ONLY-DIR-P)Fsystem-move-file-to-trash
 Move file or directory named FILENAME to the recycle bin.
 
-(fn FILENAME)Fw32-send-sys-command
+(fn FILENAME)Fime-force-on
+Force status of IME open.
+
+(fn &optional EVENTP)Fime-force-off
+Force status of IME close.
+
+(fn &optional EVENTP)Fime-get-mode
+Get IME status.
+t means status of IME is open.  nil means it is close.
+
+(fn)Fw32-set-ime-mode
+Set IME mode to MODE. If FRAME is omitted, the selected frame is used.
+
+(fn MODE &optional FRAME)Fw32-ime-register-word-dialog
+Open IME regist word dialog.
+
+(fn READING WORD)Fime-get-property
+Retrieves the property and capabilities of the IME associated with the specified input locale.
+INDEX is one of igp-property, igp-conversion, igp-sentence, igp-ui, igp-setcompstr, igp-select of igp-getimeversion
+
+(fn INDEX)Fw32-ime-perform-reconversion
+perfom ime reconversion.
+
+(fn)Fw32-send-sys-command
 Send frame a Windows WM_SYSCOMMAND message of type COMMAND.
 Some useful values for COMMAND are #xf030 to maximize frame (#xf020
 to minimize), #xf120 to restore frame to original size, and #xf100
@@ -2104,7 +2127,12 @@ Setting this to t will prevent wrong fonts being selected when
 fontsets are automatically created.Vw32-strict-painting
 Non-nil means use strict rules for repainting frames.
 Set this to nil to get the old behavior for repainting; this should
-only be necessary if the default setting causes problems.Vw32-ansi-code-page
+only be necessary if the default setting causes problems.Vime-enable-reconversion
+Non-nil enables IME reconversion capability.Vime-enable-document-feed
+Non-nil enables IME document feed capability.Vime-control
+IME control flag.Vw32-ime-composition-window
+If this is a window of current frame, IME composition window appears on the
+window instead of current window.Vw32-ansi-code-page
 The ANSI code page used by the system.Sw32heap.o
 Sw32inevt.o
 Sw32notify.o
