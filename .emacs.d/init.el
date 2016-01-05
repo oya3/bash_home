@@ -580,21 +580,21 @@ mouse-3: delete other windows"
 ;; ctags
 ;; $ ctags -R -e *
 
-;; GNU global タグジャンプ
-(autoload 'gtags-mode "gtags" "" t)
-;; (require 'gtags)
-(setq gtags-mode-hook
-      '(lambda ()
-         (local-set-key "\M-t" 'gtags-find-tag) ;関数の定義元へ
-         (local-set-key "\M-r" 'gtags-find-rtag) ;関数の参照先へ
-         (local-set-key "\M-s" 'gtags-find-symbol) ;変数の定義元/参照先へ
-         (local-set-key "\C-t" 'gtags-pop-stack) ;前のバッファに戻る
-         ;; (define-key gtags-select-mode-map "p" 'previous-line)
-         ;; (define-key gtags-select-mode-map "n" 'next-line)
-         (define-key gtags-select-mode-map "\C-t" 'gtags-pop-stack)
-         (define-key gtags-select-mode-map "\C-m" 'gtags-select-tag)
-         )
-      )
+;; ;; GNU global タグジャンプ
+;; (autoload 'gtags-mode "gtags" "" t)
+;; ;; (require 'gtags)
+;; (setq gtags-mode-hook
+;;       '(lambda ()
+;;          (local-set-key "\M-t" 'gtags-find-tag) ;関数の定義元へ
+;;          (local-set-key "\M-r" 'gtags-find-rtag) ;関数の参照先へ
+;;          (local-set-key "\M-s" 'gtags-find-symbol) ;変数の定義元/参照先へ
+;;          (local-set-key "\C-t" 'gtags-pop-stack) ;前のバッファに戻る
+;;          ;; (define-key gtags-select-mode-map "p" 'previous-line)
+;;          ;; (define-key gtags-select-mode-map "n" 'next-line)
+;;          (define-key gtags-select-mode-map "\C-t" 'gtags-pop-stack)
+;;          (define-key gtags-select-mode-map "\C-m" 'gtags-select-tag)
+;;          )
+;;       )
 
 ;; 自動補完有効化
 (require 'auto-complete)
@@ -729,6 +729,18 @@ mouse-3: delete other windows"
 ;; nilなら一覧のテキストカラーを失う代わりに、起動スピードをほんの少し上げる
 (setq helm-swoop-speed-or-color t)
 
+
+;; gtags-mode をやめて helm-gtags に変更 2016/01/05
+;; helm-gtags
+(require 'helm-gtags)
+;; key bindings
+(add-hook 'helm-gtags-mode-hook
+          '(lambda ()
+              (local-set-key (kbd "M-t") 'helm-gtags-find-tag)
+              (local-set-key (kbd "M-r") 'helm-gtags-find-rtag)
+              (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
+              (local-set-key (kbd "C-t") 'helm-gtags-pop-stack)))
+
 ;; grep のかわりに ag 使う
 ;; (require 'helm-ag)
 ;; http://blog.kowalczyk.info/software/the-silver-searcher-for-windows.html
@@ -817,13 +829,14 @@ mouse-3: delete other windows"
              (setq c-basic-offset 4)
              (setq c-tab-always-indent t)
              (local-set-key (kbd "RET") 'newline-and-indent)
-             (gtags-mode 1)
+             ;; (gtags-mode 1)
              ;; (local-set-key "\M-t" 'gtags-find-tag) ;関数の定義元へ
              ;; (local-set-key "\M-r" 'gtags-find-rtag) ;関数の参照先へ
              ;; (local-set-key "\M-s" 'gtags-find-symbol) ;変数の定義元/参照先へ
              ;; (local-set-key "\C-t" 'gtags-pop-stack) ;前のバッファに戻る
              )
           )
+(add-hook 'c-mode-hook 'helm-gtags-mode)
 
 ;;------------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
@@ -836,21 +849,23 @@ mouse-3: delete other windows"
              (setq c-basic-offset 4)
              (setq c-tab-always-indent t)
              (local-set-key (kbd "RET") 'newline-and-indent)
-             (gtags-mode 1)
+             ;; (gtags-mode 1)
              ;; (local-set-key "\M-t" 'gtags-find-tag) ;関数の定義元へ
              ;; (local-set-key "\M-r" 'gtags-find-rtag) ;関数の参照先へ
              ;; (local-set-key "\M-s" 'gtags-find-symbol) ;変数の定義元/参照先へ
              ;; (local-set-key "\C-t" 'gtags-pop-stack) ;前のバッファに戻る
              )
           )
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
 
 ;;------------------------------------------------------------------------------
 (add-hook 'java-mode-hook
           '(lambda()
              (setq indent-tabs-mode t)
-             (gtags-mode 1)
+             ;; (gtags-mode 1)
              )
           )
+(add-hook 'java-mode-hook 'helm-gtags-mode)
 
 ;;------------------------------------------------------------------------------
 ;; (require 'csharp-mode)
@@ -965,9 +980,10 @@ mouse-3: delete other windows"
              (setq js-indent-level 2)
              (setq indent-tabs-mode nil)
              (local-set-key (kbd "RET") 'newline-and-indent)
-             (gtags-mode 1)
+             ;; (gtags-mode 1)
              )
           )
+(add-hook 'js-mode-hook 'helm-gtags-mode)
 
 ;;------------------------------------------------------------------------------
 ;; coffee-mode
