@@ -30,4 +30,4 @@ GIT_PS1_SHOWUPSTREAM=auto
 # export no_proxy=192.168.10.13
 # export NO_PROXY=192.168.10.13
 
-alias gohome='cd /c/home'
+
