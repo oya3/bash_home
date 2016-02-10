@@ -188,6 +188,12 @@
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
+;; ――― ようわからん不具合対応用 START ―――
+;; コンソールエリアに "Invalid search bound (wrong side of point)" が表示されコピペが動作しなくなる問題を解決する用
+(setq-default cache-long-scans nil)
+;; ad-handle-definition: `tramp-read-passwd' got redefined
+(setq ad-redefinition-action 'accept)
+;; ――― ようわからん不具合対応用 END ―――
 
 ;; 複数ウィンドウを開かないようにする
 (setq ns-pop-up-frames nil)
@@ -245,8 +251,10 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
-;; 時計表示
-(display-time-mode t)
+;;--------------------TEST
+;; ;; 時計表示
+;; (display-time-mode t)
+;;--------------------
 
 ;; 左ペインに行番号表示
 (require 'linum)
@@ -1204,21 +1212,7 @@ mouse-3: delete other windows"
 
 (add-hook 'emacs-startup-hook 'my-load-frame-size)
 (add-hook 'kill-emacs-hook 'my-save-frame-size)
-(run-with-idle-timer 60 t 'my-save-frame-size)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+;; (run-with-idle-timer 60 t 'my-save-frame-size)
 
 ; 起動時に自動で前回の状態になる !!この行はファイル末尾に記載すること!!
 (desktop-read)
