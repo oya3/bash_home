@@ -636,8 +636,16 @@ mouse-3: delete other windows"
 ;; (require 'helm)
 ;; helm-config を require しなと動作しないらしい。
 (when (require 'helm-config nil t)
+  (require 'helm-descbinds)
   (helm-mode 1)
 
+  ;; これないと検索結果にカラムが表示される。
+  (setq helm-ag-base-command "ag --nocolor --nogroup")
+  
+  ;; helm-follow-mode （C-c C-f で ON/OFF）の前回の状態を維持する
+  ;; ↑らしいけど、実際はチラ見がかってにプレビューされる状態になる
+  (setq helm-follow-mode-persistent t)
+  
   (add-to-list 'helm-completing-read-handlers-alist '(find-file . nil))
   (add-to-list 'helm-completing-read-handlers-alist '(write-file . nil))
   (define-key global-map (kbd "M-x")     'helm-M-x)

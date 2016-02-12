@@ -18,4 +18,4 @@ realtime-preview-result.html
 .history
 .ssh
 tools/emacs/bin/emacs_backtrace.txt
-
+*.my.local.settings
