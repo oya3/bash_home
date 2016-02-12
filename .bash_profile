@@ -3,7 +3,7 @@ alias ls='ls --show-control-chars --color'
 alias ll='ls -la --show-control-chars --color'
 LS_COLORS='di=34:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
 export LS_COLORS
-alias emacs='"C:/bash_home/tools/emacs/bin/emacsclientw.exe"'
+alias emacs='"/c/bash_home/tools/emacs/bin/runemacs.exe"'
 
 # パス追加
 export PATH=$PATH:~/.emacs.d/bin
@@ -29,5 +29,3 @@ GIT_PS1_SHOWUPSTREAM=auto
 # # proxy例外
 # export no_proxy=192.168.10.13
 # export NO_PROXY=192.168.10.13
-
-
