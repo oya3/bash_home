@@ -85,6 +85,7 @@
 ;;     C-c C-e                   : 編集開始
 ;;     C-c C-c                   : 編集内容を各ファイルに保存
 ;;     C-c C-k                   : 編集内容を破棄
+;;     C-l                       : 一階層上がる
 ;;     helm-ag-pop-stack         : ジャンプ前に戻る
 ;; 参考サイト
 ;; * 来年も使いたいelispランキング2013
@@ -605,10 +606,6 @@ mouse-3: delete other windows"
 ;; (setq magit-git-executable "C:/ProgramData/chocolatey/lib/git.commandline/tools/bin/git.exe")
 
 ;;------------------------------------------------------------------------------
-;; anything やめて helm に変更
-;; (require 'anything)
-;; (require 'anything-match-plugin)
-;;
 ;; helm 便利かも。りあえず使用して様子見る(2015/10/06)
 ;; 参考 :
 ;;     https://www.naney.org/diki/d/2014-12-03-Emacs-helm.html
@@ -634,6 +631,8 @@ mouse-3: delete other windows"
   ;; (define-key global-map (kbd "C-x C-r") 'helm-recentf)
   (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
   (define-key global-map (kbd "C-c i")   'helm-imenu)
+  (define-key global-map (kbd "C-c r")   'helm-resume)
+  (define-key global-map (kbd "C-c p")   'helm-ag-pop-stack)
   (define-key global-map (kbd "C-x b")   'helm-buffers-list)
   ;; (global-set-key [f2] 'helm-buffers-list)
   ;; (global-set-key (kbd "C-t") 'helm-ag-pop-stack) # 動作しない。使い方わからない。。。
