@@ -154,8 +154,8 @@
 
 ;; server start for emacs-client
 (require 'server)
-(setq server-auth-dir "~/.emacs.d/server")  ;;Server file location
-(setq server-name "main_server")   ;;Server mutex file name
+(setq server-auth-dir "~/.emacs.d/server") ;; Server file location
+(setq server-name "main_server") ;; Server mutex file name
 (unless (server-running-p)
   (server-start))
 
@@ -535,25 +535,6 @@ mouse-3: delete other windows"
 ;; replace
 (define-key global-map (kbd "C-x r") 'query-replace-regexp)
 
-;; grep
-;; --include は複数指定可能。 複数の拡張子を指定したければ、 --include="*.cpp" --include="*.h" のようにできるはず。
-(define-key global-map (kbd "C-x g") 'grep)
-(require 'grep)
-(setq grep-command-before-query "grep -nH -r --include=\"*.*\" -P ")
-(defun grep-default-command ()
-  (if current-prefix-arg
-      (let ((grep-command-before-target
-             (concat grep-command-before-query
-                     (shell-quote-argument (grep-tag-default)))))
-        (cons (if buffer-file-name
-                  (concat grep-command-before-target
-                          " *."
-                          (file-name-extension buffer-file-name))
-                (concat grep-command-before-target " ."))
-              (+ (length grep-command-before-target) 1)))
-    (car grep-command)))
-(setq grep-command (cons (concat grep-command-before-query " .")
-                         (+ (length grep-command-before-query) 1)))
 
 ;; undo & redo
 (require 'redo+)
@@ -640,7 +621,7 @@ mouse-3: delete other windows"
   (helm-mode 1)
 
   ;; これないと検索結果にカラムが表示される。
-  (setq helm-ag-base-command "ag --nocolor --nogroup")
+  (setq helm-ag-base-command "ag --nocolor --nogroup --ignore *~ ")
   
   ;; helm-follow-mode （C-c C-f で ON/OFF）の前回の状態を維持する
   ;; ↑らしいけど、実際はチラ見がかってにプレビューされる状態になる
@@ -655,6 +636,7 @@ mouse-3: delete other windows"
   (define-key global-map (kbd "C-c i")   'helm-imenu)
   (define-key global-map (kbd "C-x b")   'helm-buffers-list)
   ;; (global-set-key [f2] 'helm-buffers-list)
+  ;; (global-set-key (kbd "C-t") 'helm-ag-pop-stack) # 動作しない。使い方わからない。。。
 
   (define-key helm-map (kbd "C-h") 'delete-backward-char)
   (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
@@ -757,12 +739,56 @@ mouse-3: delete other windows"
               (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
               (local-set-key (kbd "C-t") 'helm-gtags-pop-stack)))
 
-;; grep のかわりに ag 使う
-;; (require 'helm-ag)
-;; http://blog.kowalczyk.info/software/the-silver-searcher-for-windows.html
-;; https://github.com/syohex/emacs-helm-ag
-
 ;; (require 'helm-ls-git)
+
+
+;; grep
+;; --include は複数指定可能。 複数の拡張子を指定したければ、 --include="*.cpp" --include="*.h" のようにできるはず。
+(define-key global-map (kbd "C-x g") 'helm-ag)
+
+;; (defvar grep-command-before-query
+;;   (if (zerop (shell-command "which ag"))
+;;       "ag --nogroup -a -S "
+;;     ;; Recursive grep by -r
+;;     "grep -nH -r --include=\"*.*\" -P "))
+
+;; (defun grep-default-command ()
+;;   (lexical-let*
+;;       ((grep-read-from-point
+;;         (let ((grep-command-before-target
+;;                (concat grep-command-before-query
+;;                        (shell-quote-argument (grep-tag-default)))))
+;;           (cons (if buffer-file-name
+;;                     (concat grep-command-before-target
+;;                             " *."
+;;                             (file-name-extension buffer-file-name))
+;;                   (concat grep-command-before-target " ."))
+;;                 (1+ (length grep-command-before-target))))))
+;;     grep-read-from-point))
+
+;; (setq grep-command (cons (concat grep-command-before-query "\"\" .")
+;;                          (+ (length grep-command-before-query) 2)))
+;; ;; grep
+;; ;; --include は複数指定可能。 複数の拡張子を指定したければ、 --include="*.cpp" --include="*.h" のようにできるはず。
+;; (define-key global-map (kbd "C-x g") 'grep)
+;; (require 'grep)
+;; (setq grep-command-before-query "grep -nH -r --include=\"*.*\" -P ")
+;; (defun grep-default-command ()
+;;   (if current-prefix-arg
+;;       (let ((grep-command-before-target
+;;              (concat grep-command-before-query
+;;                      (shell-quote-argument (grep-tag-default)))))
+;;         (cons (if buffer-file-name
+;;                   (concat grep-command-before-target
+;;                           " *."
+;;                           (file-name-extension buffer-file-name))
+;;                 (concat grep-command-before-target " ."))
+;;               (+ (length grep-command-before-target) 1)))
+;;     (car grep-command)))
+;; (setq grep-command (cons (concat grep-command-before-query " .")
+;;                          (+ (length grep-command-before-query) 1)))
+
+
 
 ;;------------------------------------------------------------------------------
 
@@ -784,16 +810,23 @@ mouse-3: delete other windows"
 
 ;;------------------------------------------------------------------------------
 ;; flycheck
-(require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (require 'flycheck)
+(global-flycheck-mode)
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
+;;(add-hook 'flycheck-mode-hook 'flycheck-list-errors) ;; For wide screens
 (flycheck-add-next-checker 'javascript-jshint
-                          'javascript-gjslint)
+                           'javascript-gjslint)
+(global-set-key [f8] 'flycheck-list-errors)
 
 ;; flycheck error をポップアップ表示に変更
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
+  
+;; flycheck error をポップアップ表示に変更
 ;; (require 'flycheck-pos-tip)
-(eval-after-load 'flycheck
-  '(custom-set-variables
-    '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+;; (eval-after-load 'flycheck
+;;   '(custom-set-variables
+;;     '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 ;;------------------------------------------------------------------------------
 ;; haml モード
