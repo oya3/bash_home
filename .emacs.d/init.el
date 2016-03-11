@@ -85,6 +85,10 @@
 ;;     C-c C-e                   : 編集開始
 ;;     C-c C-c                   : 編集内容を各ファイルに保存
 ;;     C-c C-k                   : 編集内容を破棄
+;;     C-c i                     : 関数／定数 一覧    'helm-imenu
+;;     C-c r                     : 検索結果再表示     'helm-resume
+;;     C-c p                     : 検索元に戻る       'helm-ag-pop-stack
+;;     C-x b                     : バッファー一覧表示 'helm-buffers-list
 ;;     C-l                       : 一階層上がる
 ;;     helm-ag-pop-stack         : ジャンプ前に戻る
 ;; 参考サイト
