@@ -231,7 +231,8 @@ They are specified to `--ignore' options."
     (cons command args)))
 
 (defun helm-ag--init ()
-  (let ((buf-coding buffer-file-coding-system))
+  ;; (let ((buf-coding buffer-file-coding-system))
+  (let ((buf-coding 'japanese-cp932-dos))
     (helm-attrset 'recenter t)
     (with-current-buffer (helm-candidate-buffer 'global)
       (let* ((default-directory (or helm-ag--default-directory
@@ -241,6 +242,8 @@ They are specified to `--ignore' options."
              (coding-system-for-write buf-coding))
         (setq helm-ag--ignore-case (helm-ag--ignore-case-p cmds helm-ag--last-query)
               helm-ag--last-command cmds)
+        ;; (message "oya debug: helm-ag--init buf-coding: %s" buf-coding)
+        ;; (message "oya debug: helm-ag--init cmd: %s" cmds)
         (let ((ret (apply #'process-file (car cmds) nil t nil (cdr cmds))))
           (if (zerop (length (buffer-string)))
               (error "No ag output: '%s'" helm-ag--last-query)

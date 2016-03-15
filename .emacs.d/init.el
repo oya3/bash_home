@@ -622,7 +622,11 @@ mouse-3: delete other windows"
   (helm-mode 1)
 
   ;; これないと検索結果にカラムが表示される。
-  (setq helm-ag-base-command "ag --nocolor --nogroup --ignore *~ ")
+  ;; (setq helm-ag-base-command "ag --nocolor --nogroup --ignore *~ ")
+  ;; (setq helm-ag-base-command "pt --nocolor --nogroup")
+  (setq helm-ag-base-command "pt --nocolor --nogroup ")
+  (setq helm-ag-command-option "--output-encode sjis ")
+  ;; (setq helm-ag-base-command "pt /nocolor /nogroup")
   
   ;; helm-follow-mode （C-c C-f で ON/OFF）の前回の状態を維持する
   ;; ↑らしいけど、実際はチラ見がかってにプレビューされる状態になる

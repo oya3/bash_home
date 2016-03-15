@@ -1,32 +1,41 @@
+;; -*- coding: utf-8 -*-
+
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ language - coding system                                      ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; ƒfƒtƒHƒ‹ƒg‚Ì•¶šƒR[ƒh
-(set-default-coding-systems 'utf-8-unix)
+;; (set-language-environment "Japanese")
 
-;; ƒeƒLƒXƒgƒtƒ@ƒCƒ‹^V‹Kƒoƒbƒtƒ@‚Ì•¶šƒR[ƒh
-(prefer-coding-system 'utf-8-unix)
+;; ;; ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®æ–‡å­—ã‚³ãƒ¼ãƒ‰
+;; (set-default-coding-systems 'utf-8-unix)
+;; (set-default-coding-systems 'cp932-dos)
 
-;; ƒtƒ@ƒCƒ‹–¼‚Ì•¶šƒR[ƒh
-(set-file-name-coding-system 'utf-8-unix)
+;; ;; ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ï¼æ–°è¦ãƒãƒƒãƒ•ã‚¡ã®æ–‡å­—ã‚³ãƒ¼ãƒ‰
+;; (prefer-coding-system 'utf-8-unix)
+;; (prefer-coding-system 'cp932-dos)
 
-;; ƒL[ƒ{[ƒh“ü—Í‚Ì•¶šƒR[ƒh
-(set-keyboard-coding-system 'utf-8-unix)
+;; ;; ãƒ•ã‚¡ã‚¤ãƒ«åã®æ–‡å­—ã‚³ãƒ¼ãƒ‰
+;; (set-file-name-coding-system 'utf-8-unix)
+;; (set-file-name-coding-system 'cp932-dos)
 
-;; ƒTƒuƒvƒƒZƒX‚ÌƒfƒtƒHƒ‹ƒg•¶šƒR[ƒh
-(setq default-process-coding-system '(undecided-dos . utf-8-unix))
+;; ;; ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›ã®æ–‡å­—ã‚³ãƒ¼ãƒ‰
+;; (set-keyboard-coding-system 'utf-8-unix)
+;; (set-file-name-coding-system 'cp932-dos)
 
-;; ŠÂ‹«ˆË‘¶•¶š •¶š‰»‚¯‘Î‰
+;; ;; ã‚µãƒ–ãƒ—ãƒ­ã‚»ã‚¹ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ–‡å­—ã‚³ãƒ¼ãƒ‰
+;; (setq default-process-coding-system '(undecided-dos . utf-8-unix))
+;; (setq default-process-coding-system '(undecided-dos . cp932-dos))
+
+;; ç’°å¢ƒä¾å­˜æ–‡å­— æ–‡å­—åŒ–ã‘å¯¾å¿œ
 (set-charset-priority 'ascii 'japanese-jisx0208 'latin-jisx0201
-                      'katakana-jisx0201 'iso-8859-1 'cp1252 'unicode)
+					  'katakana-jisx0201 'iso-8859-1 'cp1252 'unicode)
 (set-coding-system-priority 'utf-8 'euc-jp 'iso-2022-jp 'cp932)
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ key binding - keyboard                                        ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; AltƒL[‚ğg—p‚¹‚¸‚ÉMetaƒL[‚ğg—p
+;; Altã‚­ãƒ¼ã‚’ä½¿ç”¨ã›ãšã«Metaã‚­ãƒ¼ã‚’ä½¿ç”¨
 (setq w32-alt-is-meta t)
 
 
@@ -34,25 +43,25 @@
 ;;; @ language - input method                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; ƒ‚[ƒhƒ‰ƒCƒ“‚Ì•\¦•¶š—ñ
+;; ãƒ¢ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ³ã®è¡¨ç¤ºæ–‡å­—åˆ—
 (setq-default w32-ime-mode-line-state-indicator "[Aa] ")
-(setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[‚ ]" "[Aa]"))
+(setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[ã‚]" "[Aa]"))
 
-;;;; IME‰Šú‰»
+;;;; IMEåˆæœŸåŒ–
 ;;(w32-ime-initialize)
 ;;
-;;;; ƒfƒtƒHƒ‹ƒgIME
+;;;; ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆIME
 ;;(setq default-input-method "W32-IME")
 
-;; IME•ÏX
+;; IMEå¤‰æ›´
 ;; (global-set-key (kbd "C-\\") 'toggle-input-method)
 
-;; Š¿š/•ÏŠ·ƒL[“ü—Í‚ÌƒGƒ‰[ƒƒbƒZ[ƒW—}~
+;; æ¼¢å­—/å¤‰æ›ã‚­ãƒ¼å…¥åŠ›æ™‚ã®ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸æŠ‘æ­¢
 (global-set-key (kbd "<M-kanji>") 'ignore)
 (global-set-key (kbd "<kanji>") 'ignore)
 
-;; ;; w32-ime-buffer-switch-p ‚ğ t ‚É‚µ‚Ä helm ‚ğ—˜—p‚·‚éê‡‚ÉAƒ~ƒjƒoƒbƒtƒ@‚ÅŠ¿š‚ğ³í‚É
-;; ;; g‚¦‚é‚æ‚¤‚É‚·‚é‘Îôi‚±‚Ìİ’è‚ª‚È‚¢‚ÆAime ‚ªŸè‚ÉØ‚è‘Ö‚í‚Á‚½‚è‚·‚éj
+;; ;; w32-ime-buffer-switch-p ã‚’ t ã«ã—ã¦ helm ã‚’åˆ©ç”¨ã™ã‚‹å ´åˆã«ã€ãƒŸãƒ‹ãƒãƒƒãƒ•ã‚¡ã§æ¼¢å­—ã‚’æ­£å¸¸ã«
+;; ;; ä½¿ãˆã‚‹ã‚ˆã†ã«ã™ã‚‹å¯¾ç­–ï¼ˆã“ã®è¨­å®šãŒãªã„ã¨ã€ime ãŒå‹æ‰‹ã«åˆ‡ã‚Šæ›¿ã‚ã£ãŸã‚Šã™ã‚‹ï¼‰
 ;; (setq w32-ime-buffer-switch-p t)
 
 
@@ -60,12 +69,12 @@
 ;;; @ language - fontset                                            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; ƒtƒHƒ“ƒgƒTƒCƒY’²®
+;; ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºèª¿æ•´
 (global-set-key (kbd "C-<wheel-up>")   '(lambda() (interactive) (text-scale-increase 1)))
 (global-set-key (kbd "C-=")            '(lambda() (interactive) (text-scale-increase 1)))
 (global-set-key (kbd "C-<wheel-down>") '(lambda() (interactive) (text-scale-decrease 1)))
 (global-set-key (kbd "C--")            '(lambda() (interactive) (text-scale-decrease 1)))
 
-;; ƒtƒHƒ“ƒgƒTƒCƒY ƒŠƒZƒbƒg
+;; ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º ãƒªã‚»ãƒƒãƒˆ
 (global-set-key (kbd "M-0") '(lambda() (interactive) (text-scale-set 0)))
 
