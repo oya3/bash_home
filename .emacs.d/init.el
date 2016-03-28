@@ -627,6 +627,10 @@ mouse-3: delete other windows"
   (setq helm-ag-base-command "pt --nocolor --nogroup ")
   (setq helm-ag-command-option "--output-encode sjis ")
   ;; (setq helm-ag-base-command "pt /nocolor /nogroup")
+
+  ;; 検索対象外ファイルの指定( vc起動に生成される *.ncb, *.suo を除外しておかないとvc起動中は検索が失敗する。vcがファイルロックするから。。。slnファイルはロックされない)
+  (defvar helm-ag-ignore-patterns)
+  (setq helm-ag-ignore-patterns '("*~" "#.*#" "GPATH" "GRTAGS" "GTAGS" "*.ncb" "*.suo"))
   
   ;; helm-follow-mode （C-c C-f で ON/OFF）の前回の状態を維持する
   ;; ↑らしいけど、実際はチラ見がかってにプレビューされる状態になる
@@ -818,11 +822,18 @@ mouse-3: delete other windows"
 ;;------------------------------------------------------------------------------
 ;; flycheck
 ;; (require 'flycheck)
-(global-flycheck-mode)
+;; flycheckを特定のモードでだけ有効にする
+;; http://qiita.com/noriaki/items/8122e83867ff0cdb5d13
+;; 全モード有効にしたい場合
+;; (global-flycheck-mode)
+;; 個別に有効にしたい場合(例：ruby)
+;; (add-hook 'ruby-mode-hook #'flycheck-mode)
+
+
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 ;;(add-hook 'flycheck-mode-hook 'flycheck-list-errors) ;; For wide screens
-(flycheck-add-next-checker 'javascript-jshint
-                           'javascript-gjslint)
+;;(flycheck-add-next-checker 'javascript-jshint
+;;                           'javascript-gjslint)
 (global-set-key [f8] 'flycheck-list-errors)
 
 ;; flycheck error をポップアップ表示に変更
@@ -1008,9 +1019,9 @@ mouse-3: delete other windows"
              (local-set-key (kbd "RET") 'newline-and-indent)
              (local-set-key "\M-t" 'find-tag) ;関数の定義元へ
              (local-set-key "\C-t" 'pop-tag-mark) ;前のバッファに戻る
+             (flycheck-mode t)
              )
           )
-
 
 (autoload 'ruby-mode "ruby-mode"
   "Mode for editing ruby source files" t)
@@ -1036,6 +1047,7 @@ mouse-3: delete other windows"
              ;; ドキュメントを表示する
              (define-key global-map (kbd "M-p") 'cperl-perldoc)
              (local-set-key (kbd "RET") 'newline-and-indent)
+             (flycheck-mode t)
              )
           )
 
@@ -1054,6 +1066,9 @@ mouse-3: delete other windows"
              (setq indent-tabs-mode nil)
              (local-set-key (kbd "RET") 'newline-and-indent)
              ;; (gtags-mode 1)
+             (flycheck-mode t)
+             (flycheck-add-next-checker 'javascript-jshint
+                                        'javascript-gjslint)
              )
           )
 (add-hook 'js-mode-hook 'helm-gtags-mode)
@@ -1063,7 +1078,7 @@ mouse-3: delete other windows"
 ;; (require 'coffee-mode)
 (custom-set-variables '(coffee-tab-width 2))
 (add-to-list 'ac-modes 'coffee-mode) ; auto-complete 発動
-
+(add-hook 'coffee-mode-hook #'flycheck-mode)
 ;; 以下はやめて flycheck に統一。
 ;; (require 'flymake-easy)
 ;; (require 'flymake-coffee)
