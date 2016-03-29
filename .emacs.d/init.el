@@ -617,10 +617,13 @@ mouse-3: delete other windows"
 ;; 
 ;; (require 'helm)
 ;; helm-config を require しなと動作しないらしい。
+
+;; (setq default-process-coding-system '(utf-8-dos . cp932))
+
 (when (require 'helm-config nil t)
   (require 'helm-descbinds)
   (helm-mode 1)
-
+  
   ;; これないと検索結果にカラムが表示される。
   ;; (setq helm-ag-base-command "ag --nocolor --nogroup --ignore *~ ")
   ;; (setq helm-ag-base-command "pt --nocolor --nogroup")
@@ -629,9 +632,12 @@ mouse-3: delete other windows"
   ;; (setq helm-ag-base-command "pt /nocolor /nogroup")
 
   ;; 検索対象外ファイルの指定( vc起動に生成される *.ncb, *.suo を除外しておかないとvc起動中は検索が失敗する。vcがファイルロックするから。。。slnファイルはロックされない)
-  (defvar helm-ag-ignore-patterns)
+  ;; helm-ag用 --ignoreオプション
   (setq helm-ag-ignore-patterns '("*~" "#.*#" "GPATH" "GRTAGS" "GTAGS" "*.ncb" "*.suo"))
-  
+  ;; (setq helm-ag-always-set-extra-option t) ;; helm-do-ag 実行時のオプション入力許可
+  ;; helm-do-ag用 --ignoreオプション
+  (setq helm-ag--extra-options "--ignore \"GPATH\" --ignore \"GRTAGS\" --ignore \"GTAGS\" --ignore \"*.ncb\" --ignore \"*.suo\" ")
+
   ;; helm-follow-mode （C-c C-f で ON/OFF）の前回の状態を維持する
   ;; ↑らしいけど、実際はチラ見がかってにプレビューされる状態になる
   (setq helm-follow-mode-persistent t)

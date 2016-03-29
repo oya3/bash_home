@@ -231,7 +231,7 @@ They are specified to `--ignore' options."
     (cons command args)))
 
 (defun helm-ag--init ()
-  ;; (let ((buf-coding buffer-file-coding-system))
+  ;; (let ((buf-coding buffer-file-coding-system)) ;; 変更 oya
   (let ((buf-coding 'japanese-cp932-dos))
     (helm-attrset 'recenter t)
     (with-current-buffer (helm-candidate-buffer 'global)
@@ -878,6 +878,12 @@ Continue searching the parent directory? "))
                                 helm-ag--last-default-directory
                                 default-directory))
          (cmd-args (helm-ag--construct-do-ag-command helm-pattern)))
+    ;; 追加 oya
+    (let* ((default-directory (or helm-ag--default-directory
+                                  default-directory))
+           (coding-system-for-read 'japanese-cp932-dos)
+           (coding-system-for-write 'japanese-cp932-dos))
+      
     (when cmd-args
       (let ((proc (apply #'start-file-process "helm-do-ag" nil cmd-args)))
         (setq helm-ag--last-query helm-pattern
@@ -892,6 +898,8 @@ Continue searching the parent directory? "))
               process event (helm-default-directory))
              (when (string= event "finished\n")
                (helm-ag--do-ag-propertize helm-input)))))))))
+      ) ;; 追加 oya
+  
 
 (defconst helm-do-ag--help-message
   "\n* Helm Do Ag\n
@@ -1007,7 +1015,9 @@ Continue searching the parent directory? "))
          (one-directory-p (helm-do-ag--target-one-directory-p
                            helm-ag--default-target)))
     (helm-ag--set-do-ag-option)
+    ;; (message "oya debug: helm-do-ag helm-ag--extra-options: %s" helm-ag--extra-options)
     (helm-ag--set-command-feature)
+    ;; (message "oya debug: helm-do-ag helm-ag--command-feature: %s" helm-ag--command-feature)
     (helm-ag--save-current-context)
     (helm-attrset 'search-this-file (and (= (length targets) 1) (car targets)) helm-source-do-ag)
     (if (or (helm-ag--windows-p) (not one-directory-p)) ;; Path argument must be specified on Windows
