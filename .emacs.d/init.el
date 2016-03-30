@@ -203,15 +203,6 @@
 ;; 複数ウィンドウを開かないようにする
 (setq ns-pop-up-frames nil)
 
-;; (setq default-input-method "MW32-IME")
-;; ;; default-input-method の設定を有効にする
-;; (mw32-ime-initialize)
-
-;; 日本語設定
-;; (set-keyboard-coding-system 'japanese-shift-jis)
-;; (setq default-input-method "W32-IME")
-;; (w32-ime-initialize)
-
 ;; 起動メッセージを表示しない
 (setq inhibit-startup-message t)
 

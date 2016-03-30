@@ -43,6 +43,8 @@
 ;;; @ language - input method                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
+(setq default-input-method "W32-IME")
+
 ;; モードラインの表示文字列
 (setq-default w32-ime-mode-line-state-indicator "[Aa] ")
 (setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[あ]" "[Aa]"))
