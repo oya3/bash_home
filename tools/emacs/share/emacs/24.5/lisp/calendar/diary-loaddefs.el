@@ -339,7 +339,7 @@ Accurate to a few seconds.
 ;;;### (autoloads nil nil ("appt.el" "cal-dst.el" "cal-html.el" "cal-loaddefs.el"
 ;;;;;;  "cal-menu.el" "cal-move.el" "cal-tex.el" "cal-x.el" "calendar.el"
 ;;;;;;  "diary-lib.el" "icalendar.el" "parse-time.el" "time-date.el"
-;;;;;;  "timeclock.el" "todo-mode.el") (21804 47399 952510 600000))
+;;;;;;  "timeclock.el" "todo-mode.el") (22014 52830 787932 900000))
 
 ;;;***
 

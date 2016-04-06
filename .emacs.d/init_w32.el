@@ -43,24 +43,24 @@
 ;;; @ language - input method                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(setq default-input-method "W32-IME")
+;; ;; IMEパッチ版の場合の設定
+;; (setq default-input-method "W32-IME")
+;; ;; モードラインの表示文字列
+;; (setq-default w32-ime-mode-line-state-indicator "[Aa] ")
+;; (setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[あ]" "[Aa]"))
+;; ;; 漢字/変換キー入力時のエラーメッセージ抑止
+;; (global-set-key (kbd "<M-kanji>") 'ignore)
+;; (global-set-key (kbd "<kanji>") 'ignore)
 
-;; モードラインの表示文字列
-(setq-default w32-ime-mode-line-state-indicator "[Aa] ")
-(setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[あ]" "[Aa]"))
+;; ;; IME初期化
+;; (w32-ime-initialize)
 
-;;;; IME初期化
-;;(w32-ime-initialize)
 ;;
 ;;;; デフォルトIME
 ;;(setq default-input-method "W32-IME")
 
 ;; IME変更
 ;; (global-set-key (kbd "C-\\") 'toggle-input-method)
-
-;; 漢字/変換キー入力時のエラーメッセージ抑止
-(global-set-key (kbd "<M-kanji>") 'ignore)
-(global-set-key (kbd "<kanji>") 'ignore)
 
 ;; ;; w32-ime-buffer-switch-p を t にして helm を利用する場合に、ミニバッファで漢字を正常に
 ;; ;; 使えるようにする対策（この設定がないと、ime が勝手に切り替わったりする）

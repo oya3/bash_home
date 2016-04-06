@@ -106,12 +106,8 @@
 ;;;---------------------------------
 ;;; ntemacs 取得元
 ;;;---------------------------------
-;; 公式 32bit版
-;;  http://ftp.gnu.org/pub/gnu/emacs/windows/
-;; 非公式 IMEパッチ適用済み32bit版
-;;  http://cha.la.coocan.jp/files/emacs-24.5-shared-libgcc-nodebug.zip
-;; 非公式 IMEパッチ適用済み64bit版
-;;  https://github.com/chuntaro/NTEmacs64
+;; NTEmacs / Emacs for Windows
+;;  http://cha.la.coocan.jp/doc/NTEmacs.html
 
 ;;;---------------------------------
 ;;; 基本設定
@@ -175,7 +171,11 @@
 ;; git command が利用できるよう portablgit/bin も PATH に追加した。2015/10/13
 ;;(setenv "PATH" (format "C:/tools/emacs/bin;C:/ProgramData/chocolatey/lib/git.commandline/tools/bin;C:/bash_home/.emacs.d/bin;%s" (getenv "PATH")))
 ;; (setenv "PATH" (format "C:/bash_home/tools/emacs/bin;C:/bash_home/.emacs.d/bin;%s" (getenv "PATH")))
-(setenv "PATH" (format "C:/bash_home/.emacs.d/bin;%s" (getenv "PATH")))
+;; (setenv "PATH" (format "C:/bash_home/.emacs.d/bin;%s" (getenv "PATH")))
+
+;; emacs/bin を PATH に登録しないと cmd.exe が起動できない...for 簡易IMEパッチ版
+;;  http://anago.2ch.net/test/read.cgi/software/1425826918/
+(setenv "PATH" (format "C:/bash_home/tools/emacs/bin;C:/bash_home/.emacs.d/bin;%s" (getenv "PATH")))
 ;; 実行パスにもPATHを反映させておく必要がある。
 ;; 参考 : http://emacs-jp.github.io/tips/environment-variable.html
 (setq exec-path (parse-colon-path (getenv "PATH")))
@@ -514,19 +514,20 @@ mouse-3: delete other windows"
 (setq isearch-wrap-function (lambda () (error "no more matches")))
 ;; Tabで検索文字列を補完
 (define-key isearch-mode-map (kbd "TAB") 'isearch-yank-word)
-;; 日本語の検索文字列をミニバッファに表示
-(define-key isearch-mode-map (kbd "<compend>")
-  '(lambda() (interactive) (isearch-update)))
-(define-key isearch-mode-map (kbd "<kanji>")
-  'isearch-toggle-input-method)
-(add-hook
- 'isearch-mode-hook
- '(lambda() (setq w32-ime-composition-window (minibuffer-window)))
- )
-(add-hook
- 'isearch-mode-end-hook
- '(lambda() (setq w32-ime-composition-window nil))
- )
+
+;; ;; 日本語の検索文字列をミニバッファに表示
+;; (define-key isearch-mode-map (kbd "<compend>")
+;;   '(lambda() (interactive) (isearch-update)))
+;; (define-key isearch-mode-map (kbd "<kanji>")
+;;   'isearch-toggle-input-method)
+;; (add-hook
+;;  'isearch-mode-hook
+;;  '(lambda() (setq w32-ime-composition-window (minibuffer-window)))
+;;  )
+;; (add-hook
+;;  'isearch-mode-end-hook
+;;  '(lambda() (setq w32-ime-composition-window nil))
+;;  )
 
 ;; replace
 (define-key global-map (kbd "C-x r") 'query-replace-regexp)
@@ -627,7 +628,7 @@ mouse-3: delete other windows"
   (setq helm-ag-ignore-patterns '("*~" "#.*#" "GPATH" "GRTAGS" "GTAGS" "*.ncb" "*.suo"))
   ;; (setq helm-ag-always-set-extra-option t) ;; helm-do-ag 実行時のオプション入力許可
   ;; helm-do-ag用 --ignoreオプション
-  (setq helm-ag--extra-options "--ignore \"GPATH\" --ignore \"GRTAGS\" --ignore \"GTAGS\" --ignore \"*.ncb\" --ignore \"*.suo\" ")
+  (setq helm-ag--extra-options "--ignore \"GPATH\" --ignore \"GRTAGS\" --ignore \"GTAGS\" --ignore \"*.ncb\" --ignore \"*.suo\" --ignore \"*.intermediate.manifest\" ")
 
   ;; helm-follow-mode （C-c C-f で ON/OFF）の前回の状態を維持する
   ;; ↑らしいけど、実際はチラ見がかってにプレビューされる状態になる
@@ -1017,6 +1018,7 @@ mouse-3: delete other windows"
              (local-set-key "\M-t" 'find-tag) ;関数の定義元へ
              (local-set-key "\C-t" 'pop-tag-mark) ;前のバッファに戻る
              (flycheck-mode t)
+             (helm-gtags-mode)
              )
           )
 

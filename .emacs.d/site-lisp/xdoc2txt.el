@@ -128,6 +128,7 @@
       (set-buffer-file-coding-system 'utf-8)
 
       (copy-file file fn t)
+      ;; oya (message "XDOC2TXT FILE: %s %s" (file-name-directory file) (file-name-nondirectory file))
       (insert
        "XDOC2TXT FILE: " (file-name-directory file) (file-name-nondirectory file) "\n"
        "----------------------------------------------------\n"
