@@ -745,7 +745,16 @@ Continue searching the parent directory? "))
       (setq basedir default-directory
             targets dir))
     (let ((helm-ag--default-directory (or basedir dir))
-          (helm-ag--default-target targets))
+          ;; oya (helm-ag--default-target targets))
+          ;; 検索対象ディレクトを選択できるよう修正
+          (helm-ag--default-target (cond (targets targets)
+                                         ((and (helm-ag--windows-p) basedir) (list basedir))
+                                         (t
+                                          (when (and (not basedir) (not helm-ag--buffer-search))
+                                           (helm-read-file-name
+                                            "Search in file(s): "
+                                            :default default-directory
+                                            :marked-candidates t :must-match t))))))
       (helm-ag--query)
       (helm-attrset 'search-this-file nil helm-ag-source)
       (helm-attrset 'name (helm-ag--helm-header helm-ag--default-directory) helm-ag-source)
@@ -878,7 +887,7 @@ Continue searching the parent directory? "))
                                 helm-ag--last-default-directory
                                 default-directory))
          (cmd-args (helm-ag--construct-do-ag-command helm-pattern)))
-    ;; 追加 oya
+    ;; oya 入力／出力文字コードをcp932に固定
     (let* ((default-directory (or helm-ag--default-directory
                                   default-directory))
            (coding-system-for-read 'japanese-cp932-dos)
@@ -898,7 +907,7 @@ Continue searching the parent directory? "))
               process event (helm-default-directory))
              (when (string= event "finished\n")
                (helm-ag--do-ag-propertize helm-input)))))))))
-      ) ;; 追加 oya
+      ) ;; oya
   
 
 (defconst helm-do-ag--help-message
