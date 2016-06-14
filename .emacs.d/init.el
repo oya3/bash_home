@@ -200,6 +200,13 @@
 (setq ad-redefinition-action 'accept)
 ;; ――― ようわからん不具合対応用 END ―――
 
+;; desktop-save-mode 終了時のフレーム状態を保存
+(desktop-save-mode 1)
+
+;; 自動バックアップ無効
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
 ;; 複数ウィンドウを開かないようにする
 (setq ns-pop-up-frames nil)
 
@@ -252,16 +259,23 @@
 ;; (display-time-mode t)
 ;;--------------------
 
-;; 左ペインに行番号表示
-(require 'linum)
-(setq linum-format "%4d")
-(global-linum-mode)
-;;(line-number-mode t) ; 行数表示
+;; ;; 左ペインに行番号表示
+;; (require 'linum)
+;; (setq linum-format "%4d")
+;; (global-linum-mode)
+;; ;;(line-number-mode t) ; 行数表示
+
+;; バッファの左側に行番号を表示する
+(global-nlinum-mode t)
+;; 5 桁分の表示領域を確保する
+(setq nlinum-format "%5d ")
+
 (column-number-mode t) ; カラム数表示
-;; 処理速度改善処理らしい。。。
-(setq linum-delay t)
-(defadvice linum-schedule (around my-linum-schedule () activate)
-  (run-with-idle-timer 0.2 nil #'linum-update-current))
+
+;; ;; 処理速度改善処理らしい。。。
+;; (setq linum-delay t)
+;; (defadvice linum-schedule (around my-linum-schedule () activate)
+;;   (run-with-idle-timer 0.2 nil #'linum-update-current))
 
 ;; ウィンドウ幅で折り返さない設定
 ;;通常のウィンドウ用の設定
@@ -619,7 +633,7 @@ mouse-3: delete other windows"
   ;; これないと検索結果にカラムが表示される。
   ;; (setq helm-ag-base-command "ag --nocolor --nogroup --ignore *~ ")
   ;; (setq helm-ag-base-command "pt --nocolor --nogroup")
-  (setq helm-ag-base-command "pt --nocolor --nogroup ")
+  (setq helm-ag-base-command "pt --smart-case --nocolor --nogroup ")
   (setq helm-ag-command-option "--output-encode sjis ")
   ;; (setq helm-ag-base-command "pt /nocolor /nogroup")
 
@@ -751,52 +765,8 @@ mouse-3: delete other windows"
 ;; (require 'helm-ls-git)
 
 
-;; grep
-;; --include は複数指定可能。 複数の拡張子を指定したければ、 --include="*.cpp" --include="*.h" のようにできるはず。
+;; grep は helm-ag で代用
 (define-key global-map (kbd "C-x g") 'helm-ag)
-
-;; (defvar grep-command-before-query
-;;   (if (zerop (shell-command "which ag"))
-;;       "ag --nogroup -a -S "
-;;     ;; Recursive grep by -r
-;;     "grep -nH -r --include=\"*.*\" -P "))
-
-;; (defun grep-default-command ()
-;;   (lexical-let*
-;;       ((grep-read-from-point
-;;         (let ((grep-command-before-target
-;;                (concat grep-command-before-query
-;;                        (shell-quote-argument (grep-tag-default)))))
-;;           (cons (if buffer-file-name
-;;                     (concat grep-command-before-target
-;;                             " *."
-;;                             (file-name-extension buffer-file-name))
-;;                   (concat grep-command-before-target " ."))
-;;                 (1+ (length grep-command-before-target))))))
-;;     grep-read-from-point))
-
-;; (setq grep-command (cons (concat grep-command-before-query "\"\" .")
-;;                          (+ (length grep-command-before-query) 2)))
-;; ;; grep
-;; ;; --include は複数指定可能。 複数の拡張子を指定したければ、 --include="*.cpp" --include="*.h" のようにできるはず。
-;; (define-key global-map (kbd "C-x g") 'grep)
-;; (require 'grep)
-;; (setq grep-command-before-query "grep -nH -r --include=\"*.*\" -P ")
-;; (defun grep-default-command ()
-;;   (if current-prefix-arg
-;;       (let ((grep-command-before-target
-;;              (concat grep-command-before-query
-;;                      (shell-quote-argument (grep-tag-default)))))
-;;         (cons (if buffer-file-name
-;;                   (concat grep-command-before-target
-;;                           " *."
-;;                           (file-name-extension buffer-file-name))
-;;                 (concat grep-command-before-target " ."))
-;;               (+ (length grep-command-before-target) 1)))
-;;     (car grep-command)))
-;; (setq grep-command (cons (concat grep-command-before-query " .")
-;;                          (+ (length grep-command-before-query) 1)))
-
 
 
 ;;------------------------------------------------------------------------------
@@ -1196,104 +1166,4 @@ mouse-3: delete other windows"
 (push '(direx:direx-mode :position left :width 50 :dedicated t) popwin:special-display-config)
 ;; google-translate.elの翻訳バッファをポップアップで表示させる
 ;; (push '("*Google Translate*") popwin:special-display-config)
-
-
-;; ------------------------------------------------------------------------------
-;; フレームサイズを記憶する。
-;;
-;; (if window-system (progn
-;;                     (defun my-window-size-save ()
-;;                       (let* ((rlist (frame-parameters (selected-frame)))
-;;                              (ilist initial-frame-alist)
-;;                              (nCHeight (frame-height))
-;;                              (nCWidth (frame-width))
-;;                              (tMargin (if (integerp (cdr (assoc 'top rlist)))
-;;                                           (cdr (assoc 'top rlist)) 0))
-;;                              (lMargin (if (integerp (cdr (assoc 'left rlist)))
-;;                                           (cdr (assoc 'left rlist)) 0))
-;;                              buf
-;;                              (file "~/.emacs.d/.framesize.el"))
-;;                         (if (get-file-buffer (expand-file-name file))
-;;                             (setq buf (get-file-buffer (expand-file-name file)))
-;;                           (setq buf (find-file-noselect file)))
-;;                         (set-buffer buf)
-;;                         (erase-buffer)
-;;                         (insert (concat
-;;                                  ;; 初期値をいじるよりも modify-frame-parameters
-;;                                  ;; で変えるだけの方がいい?
-;;                                  "(delete 'width initial-frame-alist)\n"
-;;                                  "(delete 'height initial-frame-alist)\n"
-;;                                  "(delete 'top initial-frame-alist)\n"
-;;                                  "(delete 'left initial-frame-alist)\n"
-;;                                  "(setq initial-frame-alist (append (list\n"
-;;                                  "'(width . " (int-to-string nCWidth) ")\n"
-;;                                  "'(height . " (int-to-string nCHeight) ")\n"
-;;                                  "'(top . " (int-to-string tMargin) ")\n"
-;;                                  "'(left . " (int-to-string lMargin) "))\n"
-;;                                  "initial-frame-alist))\n"
-;;                                  ;;"(setq default-frame-alist initial-frame-alist)"
-;;                                  ))
-;;                         (save-buffer)
-;;                         ))
-
-;;                     (defun my-window-size-load ()
-;;                       (let* ((file "~/.emacs.d/.framesize.el"))
-;;                         (if (file-exists-p file)
-;;                             (load file))))
-
-;;                     (my-window-size-load)
-
-;;                     ;; Call the function above at C-x C-c.
-;;                     (defadvice save-buffers-kill-emacs
-;;                       (before save-frame-size activate)
-;;                       (my-window-size-save))
-;;                     ))
-
-;;
-;; 参考: http://d.hatena.ne.jp/Tan90909090/20121124/1353757368
-;;
-(defconst my-save-frame-file
-  "~/.emacs.d/.framesize"
-  "フレームの位置、大きさを保存するファイルのパス")
-(defun my-save-frame-size()
-  "現在のフレームの位置、大きさを`my-save-frame-file'に保存します"
-  (interactive)
-  (let* ((param (frame-parameters (selected-frame)))
-         (current-height (frame-height))
-         (current-width (frame-width))
-         (current-top-margin (if (integerp (cdr (assoc 'top param)))
-                                 (cdr (assoc 'top param))
-                                 0))
-         (current-left-margin (if (integerp (cdr (assoc 'left param)))
-                                  (cdr (assoc 'left param))
-                                  0))
-         (buf nil)
-         (file my-save-frame-file)
-         )
-    ;; ファイルと関連付けられたバッファ作成
-    (unless (setq buf (get-file-buffer (expand-file-name file)))
-      (setq buf (find-file-noselect (expand-file-name file))))
-    (set-buffer buf)
-    (erase-buffer)
-    ;; ファイル読み込み時に直接評価させる内容を記述
-    (insert
-     (concat
-      "(set-frame-size (selected-frame) "(int-to-string current-width)" "(int-to-string current-height)")\n"
-      "(set-frame-position (selected-frame) "(int-to-string current-left-margin)" "(int-to-string current-top-margin)")\n"
-      ))
-    (save-buffer)))
-(defun my-load-frame-size()
-  "`my-save-frame-file'に保存されたフレームの位置、大きさを復元します"
-  (interactive)
-  (let ((file my-save-frame-file))
-    (when (file-exists-p file)
-        (load-file file))))
-
-(add-hook 'emacs-startup-hook 'my-load-frame-size)
-(add-hook 'kill-emacs-hook 'my-save-frame-size)
-;; (run-with-idle-timer 60 t 'my-save-frame-size)
-
-; 起動時に自動で前回の状態になる !!この行はファイル末尾に記載すること!!
-(desktop-read)
-(add-hook 'kill-emacs-hook 'desktop-save-in-desktop-dir)
 
