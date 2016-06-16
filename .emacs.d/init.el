@@ -259,23 +259,24 @@
 ;; (display-time-mode t)
 ;;--------------------
 
-;; ;; 左ペインに行番号表示
-;; (require 'linum)
-;; (setq linum-format "%4d")
-;; (global-linum-mode)
-;; ;;(line-number-mode t) ; 行数表示
+;; 左ペインに行番号表示
+(require 'linum)
+(setq linum-format "%4d")
+(global-linum-mode)
+;;(line-number-mode t) ; 行数表示
 
-;; バッファの左側に行番号を表示する
-(global-nlinum-mode t)
-;; 5 桁分の表示領域を確保する
-(setq nlinum-format "%5d ")
+;; 処理速度改善処理らしい。。。
+(setq linum-delay t)
+(defadvice linum-schedule (around my-linum-schedule () activate)
+  (run-with-idle-timer 0.2 nil #'linum-update-current))
 
-(column-number-mode t) ; カラム数表示
+;; 左側ペインに行番号表示
+;; (require 'nlinum)
+;; (global-nlinum-mode t)
+;; ;; 5 桁分の表示領域を確保する
+;; (setq nlinum-format "%5d ")
 
-;; ;; 処理速度改善処理らしい。。。
-;; (setq linum-delay t)
-;; (defadvice linum-schedule (around my-linum-schedule () activate)
-;;   (run-with-idle-timer 0.2 nil #'linum-update-current))
+;; (column-number-mode t) ; カラム数表示
 
 ;; ウィンドウ幅で折り返さない設定
 ;;通常のウィンドウ用の設定
@@ -301,7 +302,7 @@
 (global-set-key [f7] 'direx:find-directory)
 
 ;; スクロールバー
-;;(scroll-bar-mode -1) ; 標準OFF
+(scroll-bar-mode 1) ; 標準OFF
 ;; (require 'yascroll)
 ;; (global-yascroll-bar-mode 1)
 

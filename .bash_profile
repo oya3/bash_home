@@ -32,3 +32,5 @@ GIT_PS1_SHOWUPSTREAM=auto
 # export no_proxy=192.168.10.13
 # export NO_PROXY=192.168.10.13
 
+alias goomron='cd "C:/home/work/omron"'
+alias gomelco='cd "C:/home/work/mitsubishi_electric"'
