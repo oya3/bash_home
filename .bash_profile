@@ -13,8 +13,8 @@ export PATH=$PATH:~/.emacs.d/bin
 # git 設定
 # source ~/.git-completion.bash
 # source ~/git-prompt.sh
-source /etc/git-completion.bash
-source /etc/git-prompt.sh
+source ~/git-completion.bash
+source ~/git-prompt.sh
 
 # add されていない変更の存在を「＊」で示す
 # commit されていない変更の存在を「＋」で示す
@@ -34,3 +34,4 @@ GIT_PS1_SHOWUPSTREAM=auto
 
 alias goomron='cd "C:/home/work/omron"'
 alias gomelco='cd "C:/home/work/mitsubishi_electric"'
+alias gowebtest='cd "C:/home/work/web_test"'

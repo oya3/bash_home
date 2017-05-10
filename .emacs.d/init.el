@@ -64,6 +64,9 @@
 
 ;; C-c ; : リージョン範囲をコメントアウト
 ;; C-;   : １行コメント
+
+;; C-M-\ : 選択範囲をオートインデント
+;; 
 ;; --- magit ---
 ;; M-x magit-status : git status を実施
 ;;     --- status中コマンド ---
@@ -101,7 +104,7 @@
 ;; * "emacsclientw.exe: connect: 対象のコンピューターによって拒否されたため、接続できませんでした。" が表示された場合
 ;;   .emacs.d\server\main_server
 ;; * 起動時framesize 云々と色々聞かれる場合
-;;   .emacs.desktop.lock を消す。だめなら .emacs.desktop や .framesize も消す
+;;   .emacs.desktop.lock を消す。だめなら .emacs.desktop も消す
 
 ;;;---------------------------------
 ;;; ntemacs 取得元
@@ -136,7 +139,7 @@
 ;;   # と文句言われた場合の方法
 ;;   git config --local http.sslVerify false
 ;; ⑤git-gutter+ の git path 設定  - (setq git-gutter+-git-executable "C:/ProgramData/chocolatey/lib/git.commandline/tools/bin/git.exe") # PATH を通したため不要
-;; 
+;;
 ;; flymake&flycheck を使う場合
 ;; (1) scss-mode(sass-mode) で利用 - $ gem install sass を実施
 ;; (2) coffee-mode で利用          - $ npm install -g coffeelint を実施
@@ -231,6 +234,8 @@
                     ;; font 設定
                     ;; (set-face-font 'default "ＭＳ Ｐ明朝-12")
                     (set-face-font 'default "ＭＳ ゴシック-11")
+                    ;; (set-face-font 'default "Ricty Diminished-12")
+
                     ;; 画面Color(背景)
                     (set-background-color "#1f1f1f")
                     (set-foreground-color "LightGray")
@@ -239,12 +244,12 @@
                     (add-to-list 'default-frame-alist '(alpha . 95))
                     ))
 
-;; バックスラッシュを円記号から斜線に置き換える
-;; http://qiita.com/acple@github/items/85fc9e52d15e0de8bb87
-(setq-default buffer-display-table (or (default-value 'buffer-display-table)
-                                       standard-display-table
-                                       (make-display-table)))
-(aset buffer-display-table ?\\ [?\x2572])
+;; ;; バックスラッシュを円記号から斜線に置き換える
+;; ;; http://qiita.com/acple@github/items/85fc9e52d15e0de8bb87
+;; (setq-default buffer-display-table (or (default-value 'buffer-display-table)
+;;                                        standard-display-table
+;;                                        (make-display-table)))
+;; (aset buffer-display-table ?\\ [?\x2572])
 
 
 ;; タイトルバーに編集中のファイルのパス名を表示
@@ -254,7 +259,7 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
-;;--------------------TEST
+;;--------------------
 ;; ;; 時計表示
 ;; (display-time-mode t)
 ;;--------------------
@@ -485,6 +490,10 @@ mouse-3: delete other windows"
 
 ;; 逆改ページ
 (global-set-key "\C-z" 'scroll-down)
+
+;; 指定の行に移る
+(global-set-key "\M-g" 'goto-line)
+
 ;; (global-set-key "\M-p" 'scroll-down)
 ;; (global-set-key "\M-n" 'scroll-up)
 
@@ -599,7 +608,6 @@ mouse-3: delete other windows"
 
 ;; 自動補完有効化
 (require 'auto-complete)
-(global-auto-complete-mode t)
 (require 'auto-complete-config)
 ;;(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/ac-dict")
 (ac-config-default)
@@ -607,6 +615,28 @@ mouse-3: delete other windows"
 (ac-set-trigger-key "TAB")
 (setq ac-delay 1.0) ; auto-completeまでの時間
 (setq ac-auto-show-menu 2.0) ; メニューが表示されるまで
+
+(global-auto-complete-mode t)
+
+(add-to-list 'ac-modes 'bat-mode)
+(add-to-list 'ac-modes 'makefile-gmake-mode)
+(add-to-list 'ac-modes 'text-mode)
+
+
+
+;; (require 'migemo)
+;; (setq migemo-command "cmigemo")
+;; (setq migemo-options '("-q" "--emacs"))
+;;
+;; ;; Set your installed path
+;; (setq migemo-dictionary "~/.emacs.d/migemo-dict")
+;;
+;; (setq migemo-user-dictionary nil)
+;; (setq migemo-regex-dictionary nil)
+;; ;; (setq migemo-coding-system 'utf-8-unix)
+;; (setq migemo-coding-system 'cp932)
+;; (load-library "migemo")
+;; (migemo-init)
 
 ;;------------------------------------------------------------------------------
 ;; (require 'magit)
@@ -621,7 +651,7 @@ mouse-3: delete other windows"
 ;; 参考 :
 ;;     https://www.naney.org/diki/d/2014-12-03-Emacs-helm.html
 ;;     http://d.hatena.ne.jp/a_bicky/20140104/1388822688
-;; 
+;;
 ;; (require 'helm)
 ;; helm-config を require しなと動作しないらしい。
 
@@ -630,7 +660,7 @@ mouse-3: delete other windows"
 (when (require 'helm-config nil t)
   (require 'helm-descbinds)
   (helm-mode 1)
-  
+
   ;; これないと検索結果にカラムが表示される。
   ;; (setq helm-ag-base-command "ag --nocolor --nogroup --ignore *~ ")
   ;; (setq helm-ag-base-command "pt --nocolor --nogroup")
@@ -648,7 +678,10 @@ mouse-3: delete other windows"
   ;; helm-follow-mode （C-c C-f で ON/OFF）の前回の状態を維持する
   ;; ↑らしいけど、実際はチラ見がかってにプレビューされる状態になる
   (setq helm-follow-mode-persistent t)
-  
+
+  ;; ;; use emacs regexp
+  ;; (setq helm-ag-use-emacs-lisp-regexp t)
+
   (add-to-list 'helm-completing-read-handlers-alist '(find-file . nil))
   (add-to-list 'helm-completing-read-handlers-alist '(write-file . nil))
   (define-key global-map (kbd "M-x")     'helm-M-x)
@@ -671,7 +704,7 @@ mouse-3: delete other windows"
   ;; (setq popwin:special-display-config '(
   ;;                                       ("helm" :regexp t)
   ;;                                       ))
-  
+
   ;; Disable helm in some functions
   (add-to-list 'helm-completing-read-handlers-alist '(find-alternate-file . nil))
 
@@ -808,7 +841,7 @@ mouse-3: delete other windows"
 ;; flycheck error をポップアップ表示に変更
 (with-eval-after-load 'flycheck
   (flycheck-pos-tip-mode))
-  
+
 ;; flycheck error をポップアップ表示に変更
 ;; (require 'flycheck-pos-tip)
 ;; (eval-after-load 'flycheck
@@ -1036,9 +1069,10 @@ mouse-3: delete other windows"
              (setq indent-tabs-mode nil)
              (local-set-key (kbd "RET") 'newline-and-indent)
              ;; (gtags-mode 1)
-             (flycheck-mode t)
-             (flycheck-add-next-checker 'javascript-jshint
-                                        'javascript-gjslint)
+             ;;; 2016/12/02 以下を有効にすると特定の日本語コメントでemacsが固まる。
+             ;;; (flycheck-mode t)
+             ;;; (flycheck-add-next-checker 'javascript-jshint
+             ;;;                            'javascript-gjslint)
              )
           )
 (add-hook 'js-mode-hook 'helm-gtags-mode)
@@ -1167,4 +1201,3 @@ mouse-3: delete other windows"
 (push '(direx:direx-mode :position left :width 50 :dedicated t) popwin:special-display-config)
 ;; google-translate.elの翻訳バッファをポップアップで表示させる
 ;; (push '("*Google Translate*") popwin:special-display-config)
-
