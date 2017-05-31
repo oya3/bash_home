@@ -47,6 +47,12 @@ $ emacs C:\bash_home\.emacs.d\init.el
 (setq url-proxy-services '(("http" . "192.168.1.200:8080")))
 ```
 
+### curl proxy 設定
+```rb
+$ emacs C:\bash_home\.curlrc
+proxy = "http://172.17.10.213:8080/"
+```
+
 ## .gitconfig を編集
 user.name, user.email を変更する
 C:\Program Files (x86)\Git\Git Bash.vbs 起動
