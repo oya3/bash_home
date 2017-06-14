@@ -852,6 +852,10 @@ mouse-3: delete other windows"
 ;; haml モード
 ;; (require 'haml-mode)
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+;; (add-hook 'haml-mode-hook
+;;           (lambda ()
+;;             (setq indent-tabs-mode t)
+;;             (define-key haml-mode-map "\C-m" 'newline-and-indent)))
 
 ;;------------------------------------------------------------------------------
 ;; scss モード
