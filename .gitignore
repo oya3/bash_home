@@ -19,3 +19,7 @@ realtime-preview-result.html
 .ssh
 tools/emacs/bin/emacs_backtrace.txt
 *.my.local.settings
+.android
+.bundle
+.curlrc
+.viminfo
