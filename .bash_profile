@@ -1,4 +1,4 @@
-PS1='\[\033]0;\W$(__git_ps1)\007\]\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\W\[\e[\0;33m\]$(__git_ps1)\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
+PS1='\[\033]0;\W$(__git_ps1)\007\]\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\W\[\e[0;33m\]$(__git_ps1)\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
 alias ls='ls --show-control-chars --color'
 alias ll='ls -la --show-control-chars --color'
 LS_COLORS='di=34:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
