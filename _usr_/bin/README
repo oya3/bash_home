@@ -1,0 +1,25 @@
+;;; hexl.l の使い方の例
+;;
+;; M-x hexl-find-file
+;; または、ファイルを読みこんだ後で
+;; M-x hexl-mode
+;; とする
+;;
+;; 編集方法は ローカルのキー割り当てを見てください
+;;
+
+
+
+;; hexl.exe のあるディレクトリ（PATH が通っていれば要らない）
+;(setq hexl-exec-directory "C:/local/bin/")
+
+;; ロード
+(load-library "hexl")
+;; オートロードにしたい場合
+;(autoload 'hexl-mode "hexl" t nil)
+;(autoload 'hexl-find-file "hexl" t nil)
+
+;; お好みで
+;(define-key *global-keymap* '(#\C-c #\C-h) 'hexl-find-file)
+
+

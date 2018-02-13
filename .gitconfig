@@ -15,4 +15,3 @@
 [https]
 
 [diff "astextplain"]
-	textconv = my_astextplain

@@ -8,7 +8,11 @@ alias emacs='"C:\bash_home\tools\emacs\bin\emacsclientw.exe"'
 # runemacs.exe はemacsが起動してないと使えない。。。
 
 # パス追加
-export PATH=$PATH:~/.emacs.d/bin
+export PATH=$PATH:~/.emacs.d/_usr_/bin
+
+# gtags with pygments settings
+export GTAGSCONF=/c/bash_home/_usr_/share/gtags/gtags.conf
+export GTAGSLABEL=pygments
 
 # git 設定
 # source ~/.git-completion.bash
