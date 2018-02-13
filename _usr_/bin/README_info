@@ -1,0 +1,138 @@
+-*- Text -*-
+これは、info.l の README ファイルです。
+
+
+info.l は xyzzy で Info 形式のドキュメントを読むためのプログラムです。
+無保証です。配布に関しては GPL に従ってください。
+また同梱している info-ja.info は Yoshiki Hayashi さんにより日本語訳され
+た info のマニュアルです。
+
+
+推奨する設定方法
+
+  (1) xyzzy.exe の置かれているディレクトリ下の site-lisp ディレクトリに 
+      info.l を置きます
+
+  (2) info.l をバイトコンパイルします
+    例： info.l が C:/xyzzy/site-lisp/info.l にある場合。
+        xyzzy を起動して、
+        M-x byte-compile-file
+        Byte commpile file: C:/xyzzy/site-lisp/info.l
+
+  (3) .xyzzy に次の一行を追加します
+        (load-library "info")
+
+  (4) xyzzy.exe の置かれているディレクトリ下の info ディレクトリに 
+      info-ja.info を置きます。インフォディレクトリには dir という名前の
+      ファイルが必要ですから、無ければ作成してください。
+
+dir ファイルの例
+--ここから--------------------------------
+-*- Text -*-
+This is the file .../info/dir, which contains the topmost node of the
+Info hierarchy.  The first time you invoke Info you start off
+looking at that node, which is (dir)Top.
+
+File: dir, Node: Top
+
+* Menu:
+
+* (info-ja)::                   インフォじゃ :^)
+* リファレンス: (reference).    [ xyzzy Reference 計画 ]
+
+* Emacs: (emacs-jp).
+* (emacs-lisp-intro)::          Programing in Emacs Lisp: An Introduction
+* Emacs Lisp: (elisp-jp).       DRAFT revision 2.0
+
+--ここまで----------------------------------
+
+
+
+実行方法
+
+    xyzzy から
+      M-x info
+      C-u M-x info
+
+    コマンドラインから
+      xyzzy -f info-standalone インフォファイル
+
+
+
+使用方法
+
+    ほぼ、Emacs と一緒です。詳細は info-ja.info を参照してください。
+
+
+
+変数
+
+    必要に応じて .xyzzy などで設定してください。
+
+    ed::*info-suffix-list*
+     TAR32.DLL を使う場合（デフォルトは gunzip.exe ）
+
+     (setq ed::*info-suffix-list* '((".info.bz2". "tar32.dll")
+                                    (".info.gz" . "tar32.dll")
+                                    (".info"    . nil)
+                                    (".bz2"     . "tar32.dll")
+                                    (".gz"      . "tar32.dll")
+                                    (""         . nil)))
+
+
+     *info-directory-list*
+        インフォディレクトリのリスト
+
+     *info-enable-edit*
+        nil でなければインフォファイルの編集が可能
+
+     *info-fontify*
+        nil でなければ文字に色をつける
+
+     *info-smooth-scroll*
+        nil でなければ”ズリズリ”スクロールする
+
+     *info-node-forecolor*
+     *info-node-backcolor*
+        ノードの文字色（*info-fontify* が nil でなければ）
+
+     *info-ref-forecolor*
+     *info-ref-backcolor*
+        クロスリファレンスの文字色（*info-fontify* が nil でなければ）
+
+     *info-menu-forecolor*
+     *info-menu-backcolor*
+        メニューの文字色（*info-fontify* が nil でなければ）
+
+     *info-mode-map*
+        インフォモードのキーマップ
+
+     *info-edit-map*
+        インフォエディットモードのキーマップ
+
+     *info-mode-hook*
+     *info-edit-mode-hook*
+     *info-selection-hook*
+        フック
+
+
+
+蛇足
+
+elisp-jp という Emacs Lisp のリファレンスマニュアルを用意して
+
+(defun info-elisp-index ()
+  (interactive)
+  (let (beg end)
+     (save-excursion
+      (setq end (prog2 (skip-syntax-spec-forward "w_j") (point)))
+      (setq beg (prog2 (skip-syntax-spec-backward "w_j") (point))))
+    (unless (= beg end)
+      (let ((index-command (buffer-substring beg end)))
+	(info "elisp-jp")
+	(ed::info-index index-command)))))
+
+このような関数を作り適当なキーに割り当てると Emacs Lisp のプログラムを
+解析する時にとてもうれしい。
+
+

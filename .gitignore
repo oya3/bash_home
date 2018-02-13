@@ -23,3 +23,9 @@ tools/emacs/bin/emacs_backtrace.txt
 .bundle
 .curlrc
 .viminfo
+
+.jruby-jar
+.m2
+.minttyrc
+.solargraph
+.tig_history

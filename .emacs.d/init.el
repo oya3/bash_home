@@ -66,7 +66,7 @@
 ;; C-;   : １行コメント
 
 ;; C-M-\ : 選択範囲をオートインデント
-;; 
+;;
 ;; --- magit ---
 ;; M-x magit-status : git status を実施
 ;;     --- status中コマンド ---
@@ -1025,7 +1025,7 @@ mouse-3: delete other windows"
              (local-set-key (kbd "RET") 'newline-and-indent)
              (local-set-key "\M-t" 'find-tag) ;関数の定義元へ
              (local-set-key "\C-t" 'pop-tag-mark) ;前のバッファに戻る
-             (flycheck-mode t)
+             ;; (flycheck-mode t)
              (helm-gtags-mode)
              )
           )
@@ -1086,7 +1086,8 @@ mouse-3: delete other windows"
 ;; (require 'coffee-mode)
 (custom-set-variables '(coffee-tab-width 2))
 (add-to-list 'ac-modes 'coffee-mode) ; auto-complete 発動
-(add-hook 'coffee-mode-hook #'flycheck-mode)
+;;(add-hook 'coffee-mode-hook #'flycheck-mode)
+
 ;; 以下はやめて flycheck に統一。
 ;; (require 'flymake-easy)
 ;; (require 'flymake-coffee)
@@ -1205,3 +1206,4 @@ mouse-3: delete other windows"
 (push '(direx:direx-mode :position left :width 50 :dedicated t) popwin:special-display-config)
 ;; google-translate.elの翻訳バッファをポップアップで表示させる
 ;; (push '("*Google Translate*") popwin:special-display-config)
+;; (put 'upcase-region 'disabled nil)
