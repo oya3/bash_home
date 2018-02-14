@@ -178,7 +178,7 @@
 
 ;; emacs/bin を PATH に登録しないと cmd.exe が起動できない...for 簡易IMEパッチ版
 ;;  http://anago.2ch.net/test/read.cgi/software/1425826918/
-(setenv "PATH" (format "C:/bash_home/tools/emacs/bin;C:/bash_home/.emacs.d/bin;%s" (getenv "PATH")))
+(setenv "PATH" (format "C:/bash_home/tools/emacs/bin;C:/bash_home/_usr_/bin;%s" (getenv "PATH")))
 ;; 実行パスにもPATHを反映させておく必要がある。
 ;; 参考 : http://emacs-jp.github.io/tips/environment-variable.html
 (setq exec-path (parse-colon-path (getenv "PATH")))
