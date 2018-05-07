@@ -10,9 +10,10 @@ alias emacs='"C:\bash_home\tools\emacs\bin\emacsclientw.exe"'
 # パス追加
 export PATH=$PATH:~/.emacs.d/_usr_/bin
 
-# gtags with pygments settings
-export GTAGSCONF=/c/bash_home/_usr_/share/gtags/gtags.conf
-export GTAGSLABEL=pygments
+# # gtags with pygments settings
+# # .globalrc に変更分を全て記載したため以下不要
+# export GTAGSCONF=/c/bash_home/_usr_/share/gtags/gtags.conf
+# export GTAGSLABEL=pygments
 
 # git 設定
 # source ~/.git-completion.bash
