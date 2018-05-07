@@ -29,3 +29,7 @@ tools/emacs/bin/emacs_backtrace.txt
 .minttyrc
 .solargraph
 .tig_history
+.guard_history
+.irbrc
+_netrc
+npm-debug.log
